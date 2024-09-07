@@ -1,3 +1,4 @@
+import MeetingTypeBanner from '@/components/MeetingTypeBanner';
 import React from 'react'
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <MeetingTypeBanner />
     </section>
   )
 }
