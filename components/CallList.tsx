@@ -88,7 +88,7 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
             type === 'ended' ? 'icons/previous.svg' : type === 'upcoming' ? 'icons/upcoming.svg' : 'icons/recordings.svg'
           }
           title={
-            (meeting as Call).state?.custom.description.substring(0, 25) || meeting.filename.substring(0, 25) || 'No description'
+            (meeting as Call).state?.custom?.description?.substring(0, 25) || meeting?.filename?.substring(0, 25) || 'Personal Meeting'
           }
           // TODO
           // To Locale String --- format to 'en-EN'
