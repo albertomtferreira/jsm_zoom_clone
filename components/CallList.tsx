@@ -1,6 +1,4 @@
-// @ ts-nocheck
-'use client';
-
+"use client"
 import { Call, CallRecording } from '@stream-io/video-react-sdk';
 
 import Loader from './Loader';
@@ -48,8 +46,7 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
     const fetchRecordings = async () => {
 
       try {
-        const callData = await Promise.all(callRecordings?.map((meeting) => meeting.queryRecordings()))
-
+        const callData = await Promise.all(callRecordings?.map((meeting) => meeting.queryRecordings()) ?? [],);
         const recordings = callData
           .filter(call => call.recordings.length > 0)
           .flatMap(call => call.recordings)
@@ -88,12 +85,13 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
             type === 'ended' ? 'icons/previous.svg' : type === 'upcoming' ? 'icons/upcoming.svg' : 'icons/recordings.svg'
           }
           title={
-            (meeting as Call).state?.custom?.description?.substring(0, 25) || meeting?.filename?.substring(0, 25) || 'Personal Meeting'
+            (meeting as Call).state?.custom?.description?.substring(0, 25) || (meeting as CallRecording)?.filename?.substring(0, 25) || 'Personal Meeting'
           }
           // TODO
           // To Locale String --- format to 'en-EN'
           date={
-            (meeting as Call).state?.startsAt.toLocaleString() || (meeting as CallRecording).start_time.toLocaleString()
+            (meeting as Call).state?.startsAt?.toLocaleString() ||
+            (meeting as CallRecording).start_time?.toLocaleString()
           }
           isPreviousMeeting={type === 'ended'}
           buttonIcon1={type === 'recordings' ? 'icons/play.svg' : undefined}
