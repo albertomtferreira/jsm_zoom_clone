@@ -9,13 +9,9 @@ const protectedRoute = createRouteMatcher([
   '/personal-room',
 ]);
 
-// TODO
-// activate the below when moving to deployment
-// export default clerkMiddleware((auth, request) => {
-//   if (protectedRoutes(request)) auth().protect()
-// })
-
-export default clerkMiddleware()
+export default clerkMiddleware((auth, request) => {
+  if (protectedRoute(request)) auth().protect()
+})
 
 export const config = {
   matcher: [
